@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -63,7 +63,7 @@ export default function Projects() {
         <div className="absolute top-40 right-40 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
         <div className="absolute bottom-40 left-40 w-64 h-64 bg-indigo-300 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="projects-title text-4xl md:text-5xl font-bold text-center text-gray-800 mb-4">
@@ -76,14 +76,12 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`group border-2 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 bg-white backdrop-blur-sm ${
-                index % 2 === 0 ? "border-blue-200 hover:border-blue-400" : "border-green-200 hover:border-green-400"
-              } relative overflow-hidden`}
+              ref={(el) => { cardsRef.current[index] = el }}
+              className={`group border-2 rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 bg-white backdrop-blur-sm ${index % 2 === 0 ? "border-blue-200 hover:border-blue-400" : "border-green-200 hover:border-green-400"
+                } relative overflow-hidden`}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${
-                index % 2 === 0 ? "from-blue-400 to-indigo-400" : "from-green-400 to-teal-400"
-              }`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-500 ${index % 2 === 0 ? "from-blue-400 to-indigo-400" : "from-green-400 to-teal-400"
+                }`}></div>
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">
                   {project.title}

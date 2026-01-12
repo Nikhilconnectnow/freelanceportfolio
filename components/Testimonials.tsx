@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Testimonials() {
   const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -66,7 +66,7 @@ export default function Testimonials() {
         <div className="absolute -top-40 right-20 w-96 h-96 bg-purple-300 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 left-20 w-80 h-80 bg-pink-300 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="testimonials-title text-4xl md:text-5xl font-bold text-center text-gray-800 mb-4">
@@ -79,14 +79,14 @@ export default function Testimonials() {
           {[1, 2, 3].map((_, i) => (
             <div
               key={i}
-              ref={(el) => (cardsRef.current[i] = el)}
+              ref={(el) => { cardsRef.current[i] = el }}
               className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-purple-100 relative overflow-hidden hover:border-purple-300"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-pink-50 opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
               <div className="relative z-10">
                 <div className="flex text-yellow-400 mb-4 text-2xl">
                   {["⭐", "⭐", "⭐", "⭐", "⭐"].map((star, idx) => (
-                    <span key={idx} className="animate-pulse" style={{animationDelay: `${idx * 0.1}s`}}>{star}</span>
+                    <span key={idx} className="animate-pulse" style={{ animationDelay: `${idx * 0.1}s` }}>{star}</span>
                   ))}
                 </div>
                 <p className="text-gray-700 text-base italic font-light leading-relaxed mb-6">
